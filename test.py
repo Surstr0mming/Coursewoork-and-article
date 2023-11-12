@@ -1,27 +1,34 @@
-import tkinter as tk
-from tkinter import scrolledtext
+"""def check_q_7_9():
+    global result_numbers
 
-def toggle_fullscreen():
-    root.attributes('-fullscreen', not root.attributes('-fullscreen'))
+    try:
+        q7 = int(entry1.get())
+        q8 = int(entry2.get())
+        q9 = int(entry3.get())
 
-# Створення головного вікна
-root = tk.Tk()
-root.title("Великий текст у віконному режимі")
+        valid_range = (100, 900)
 
-# Створення текстового поля з можливістю скролити
-text_area = scrolledtext.ScrolledText(root, wrap=tk.WORD)
-text_area.pack(fill=tk.BOTH, expand=True)
+        valid_range = (100, 900)
+        out_of_bounds = []
 
-# Додавання дуже великого тексту
-very_large_text = "Тут ваш дуже великий текст..."
-text_area.insert(tk.INSERT, very_large_text)
+        if not valid_range[0] < q7 < valid_range[1]:
+            out_of_bounds.append("q4")
+        if not valid_range[0] < q8 < valid_range[1]:
+            out_of_bounds.append("q5")
+        if not valid_range[0] < q9 < valid_range[1]:
+            out_of_bounds.append("q6")
 
-# Встановлення розмірів вікна на весь екран
-root.geometry("{0}x{1}+0+0".format(root.winfo_screenwidth(), root.winfo_screenheight()))
-
-# Кнопка для включення та вимикання повноекранного режиму
-fullscreen_button = tk.Button(root, text="Toggle Fullscreen", command=toggle_fullscreen)
-fullscreen_button.pack()
-
-# Запуск головного циклу подій
-root.mainloop()
+        if out_of_bounds:
+            result_label.config(
+                text=f"{', '.join(out_of_bounds)} {'is' if len(out_of_bounds) == 1 else 'are'} out of bounds ({valid_range[0]} - {valid_range[1]})")
+        elif gcd(q7, q8) == 1 and gcd(q7, q9) == 1 and gcd(q8, q9) == 1:
+            non_repeating_modules = [q7, q8, q9]
+            if not any(module in [q1, q2, q3, q4, q5, q6] for module in non_repeating_modules):
+                result_numbers = non_repeating_modules
+                window.destroy()  # Close the window if numbers are correct
+            else:
+                result_label.config(text=f"Modules should not repeat (q1 = {q1}, q2 = {q2}, q3 = {q3}, q4 = {q4}, q5 = {q5}, q6 = {q6})")
+        else:
+            result_label.config(text="Modules are not pairwise coprime")
+    except ValueError:
+        result_label.config(text="Please enter valid integers for q7, q8, and q9.")"""

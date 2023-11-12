@@ -72,17 +72,34 @@ def check_p():
         p2 = int(entry2.get())
         p3 = int(entry3.get())
 
-        if 100000 < p1 < 20000000 and 100000 < p2 < 20000000 and 100000 < p3 < 20000000:
-            if gcd(p1, p2) == 1 and gcd(p1, p3) == 1 and gcd(p2, p3) == 1:
-                result_numbers = [p1, p2, p3]
-                window.destroy()  # Close the window if numbers are correct
-            else:
-                result_label.config(text="Модулі не взаємопрості")
-        else:
-            result_label.config(text="Модулі не входять в діапазон")
+        valid_range = (100000, 20000000)
+        out_of_bounds = []
 
+        if not valid_range[0] < p1 < valid_range[1]:
+            out_of_bounds.append("p1")
+        if not valid_range[0] < p2 < valid_range[1]:
+            out_of_bounds.append("p2")
+        if not valid_range[0] < p3 < valid_range[1]:
+            out_of_bounds.append("p3")
+
+        if out_of_bounds:
+            result_label.config(text=f"{', '.join(out_of_bounds)} {'is' if len(out_of_bounds) == 1 else 'are'} out of bounds ({valid_range[0]} - {valid_range[1]})")
+        elif gcd(p1, p2) == 1 and gcd(p1, p3) == 1 and gcd(p2, p3) == 1:
+            result_numbers = [p1, p2, p3]
+            window.destroy()  # Close the window if numbers are correct
+        else:
+            non_coprime_pairs = []
+            if gcd(p1, p2) != 1:
+                non_coprime_pairs.append("(p1, p2)")
+            if gcd(p1, p3) != 1:
+                non_coprime_pairs.append("(p1, p3)")
+            if gcd(p2, p3) != 1:
+                non_coprime_pairs.append("(p2, p3)")
+
+            result_label.config(text=f"{', '.join(non_coprime_pairs)} {'is' if len(non_coprime_pairs) == 1 else 'are'} not pairwise coprime")
     except ValueError:
-        result_label.config(text="Будь ласка, введіть модулі.")
+        result_label.config(text="Please enter valid integers for p1, p2, and p3.")
+
 
 
 def check_q_1_3():
@@ -92,17 +109,34 @@ def check_q_1_3():
         q2 = int(entry2.get())
         q3 = int(entry3.get())
 
-        if 100 < q1 < 900 and 100 < q2 < 900 and 100 < q3 < 900:
-            if gcd(q1, q2) == 1 and gcd(q1, q3) == 1 and gcd(q2, q3) == 1:
-                result_numbers = [q1, q2, q3]
-                window.destroy()  # Close the window if numbers are correct
-            else:
-                result_label.config(text="Модулі не взаємопрості")
-        else:
-            result_label.config(text="Модулі не входять в діапазон")
+        valid_range = (100, 900)
+        out_of_bounds = []
 
+        if not valid_range[0] < q1 < valid_range[1]:
+            out_of_bounds.append("q1")
+        if not valid_range[0] < q2 < valid_range[1]:
+            out_of_bounds.append("q2")
+        if not valid_range[0] < q3 < valid_range[1]:
+            out_of_bounds.append("q3")
+
+        if out_of_bounds:
+            result_label.config(text=f"{', '.join(out_of_bounds)} {'is' if len(out_of_bounds) == 1 else 'are'} out of bounds ({valid_range[0]} - {valid_range[1]})")
+        elif gcd(q1, q2) == 1 and gcd(q1, q3) == 1 and gcd(q2, q3) == 1:
+            result_numbers = [q1, q2, q3]
+            window.destroy()  # Close the window if numbers are correct
+        else:
+            non_coprime_pairs = []
+            if gcd(q1, q2) != 1:
+                non_coprime_pairs.append("(q1, q2)")
+            if gcd(q1, q3) != 1:
+                non_coprime_pairs.append("(q1, q3)")
+            if gcd(q2, q3) != 1:
+                non_coprime_pairs.append("(q2, q3)")
+
+            result_label.config(text=f"{', '.join(non_coprime_pairs)} {'is' if len(non_coprime_pairs) == 1 else 'are'} not pairwise coprime")
     except ValueError:
-        result_label.config(text="Будь ласка, введіть модулі.")
+        result_label.config(text="Please enter valid integers for q1, q2, and q3.")
+
 
 def check_q_4_6():
     global result_numbers
@@ -111,49 +145,72 @@ def check_q_4_6():
         q5 = int(entry2.get())
         q6 = int(entry3.get())
 
-        if 100 < q4 < 900 and 100 < q5 < 900 and 100 < q6 < 900:
-            if gcd(q4, q5) == 1 and gcd(q4, q6) == 1 and gcd(q5, q6) == 1:
-                if q4 != q1 and q4 != q2 and q4 != q3 and q5 != q1 and q5 != q2 and q5 != q3 and q6 != q1 and q6 != q2 and q6 != q3:
-                    result_numbers = [q4, q5, q6]
-                    window.destroy()  # Close the window if numbers are correct
-                else:
-                    result_label.config(text=f"Модулі не мають повторюватися(q1 = {q1}, q2 = {q2}, q3 = {q3})")
-            else:
-                result_label.config(text="Модулі не взаємопрості")
-        else:
-            result_label.config(text="Модулі не входять в діапазон")
+        valid_range = (100, 900)
+        out_of_bounds = []
 
+        if not valid_range[0] < q4 < valid_range[1]:
+            out_of_bounds.append("q4")
+        if not valid_range[0] < q5 < valid_range[1]:
+            out_of_bounds.append("q5")
+        if not valid_range[0] < q6 < valid_range[1]:
+            out_of_bounds.append("q6")
+
+        if out_of_bounds:
+            result_label.config(text=f"{', '.join(out_of_bounds)} {'is' if len(out_of_bounds) == 1 else 'are'} out of bounds ({valid_range[0]} - {valid_range[1]})")
+        elif gcd(q4, q5) == 1 and gcd(q4, q6) == 1 and gcd(q5, q6) == 1:
+            non_repeating_modules = [q4, q5, q6]
+            if not any(module in [q1, q2, q3] for module in non_repeating_modules):
+                result_numbers = non_repeating_modules
+                window.destroy()  # Close the window if numbers are correct
+            else:
+                result_label.config(text=f"Modules should not repeat (q1 = {q1}, q2 = {q2}, q3 = {q3})")
+        else:
+            result_label.config(text="Modules are not pairwise coprime")
     except ValueError:
-        result_label.config(text="Будь ласка, введіть модулі.")
+        result_label.config(text="Please enter valid integers for q4, q5, and q6.")
+
 
 def check_q_7_9():
     global result_numbers
+
     try:
         q7 = int(entry1.get())
         q8 = int(entry2.get())
         q9 = int(entry3.get())
 
-        if 100 < q7 < 900 and 100 < q8 < 900 and 100 < q9 < 900:
-            if gcd(q7, q8) == 1 and gcd(q7, q9) == 1 and gcd(q8, q9) == 1:
-                if q7 != q1 and q7 != q2 and q7 != q3 and q7 != q4 and q7 != q5 and q7 != q6 and q8 != q1 and q8 != q2 and q8 != q3 and q8 != q4 and q8 != q5 and q8 != q6 and q9 != q1 and q9 != q2 and q9 != q3 and q9 != q4 and q9 != q5 and q9 != q6:
-                    result_numbers = [q7, q8, q9]
-                    window.destroy()  # Close the window if numbers are correct
-                else:
-                    result_label.config(text=f"Модулі не мають повторюватися(q1 = {q1}, q2 = {q2}, q3 = {q3}, q4 = {q4}, q5 = {q5}, q6 = {q6})")
-            else:
-                result_label.config(text="Модулі не взаємопрості")
-        else:
-            result_label.config(text="Модулі не входять в діапазон")
+        valid_range = (100, 900)
 
+        valid_range = (100, 900)
+        out_of_bounds = []
+
+        if not valid_range[0] < q7 < valid_range[1]:
+            out_of_bounds.append("q4")
+        if not valid_range[0] < q8 < valid_range[1]:
+            out_of_bounds.append("q5")
+        if not valid_range[0] < q9 < valid_range[1]:
+            out_of_bounds.append("q6")
+
+        if out_of_bounds:
+            result_label.config(
+                text=f"{', '.join(out_of_bounds)} {'is' if len(out_of_bounds) == 1 else 'are'} out of bounds ({valid_range[0]} - {valid_range[1]})")
+        elif gcd(q7, q8) == 1 and gcd(q7, q9) == 1 and gcd(q8, q9) == 1:
+            non_repeating_modules = [q7, q8, q9]
+            if not any(module in [q1, q2, q3, q4, q5, q6] for module in non_repeating_modules):
+                result_numbers = non_repeating_modules
+                window.destroy()  # Close the window if numbers are correct
+            else:
+                result_label.config(text=f"Modules should not repeat (q1 = {q1}, q2 = {q2}, q3 = {q3}, q4 = {q4}, q5 = {q5}, q6 = {q6})")
+        else:
+            result_label.config(text="Modules are not pairwise coprime")
     except ValueError:
-        result_label.config(text="Будь ласка, введіть модулі.")
+        result_label.config(text="Please enter valid integers for q7, q8, and q9.")
 
 def toggle_fullscreen():
     root.attributes('-fullscreen', not root.attributes('-fullscreen'))
 
 def copy_text():
-    selected_text = text_area.get(tk.SEL_FIRST, tk.SEL_LAST)
-    pyperclip.copy(selected_text)
+    entire_text = text_area.get("1.0", "end-1c")  # Get the entire content of the text area
+    pyperclip.copy(entire_text)
 
 if __name__ == '__main__':
     # Створення головного вікна
@@ -430,7 +487,7 @@ if __name__ == '__main__':
 
         # Запуск головного циклу подій
         root.mainloop()
-    else:
+    elif type_of_work == '2':
         window = tk.Tk()
         window.title("Введення модулів першого порядку")
 
@@ -659,3 +716,15 @@ if __name__ == '__main__':
 
         # Запуск головного циклу подій
         root.mainloop()
+    else:
+        error_message = "You have not selected any type of work. Restart the program and select the type of operation, rather than closing the selection window again."
+        error_window = tk.Tk()
+        error_window.title("Error")
+
+        label = tk.Label(error_window, text=error_message, padx=10, pady=10)
+        label.pack()
+
+        ok_button = tk.Button(error_window, text="OK", command=error_window.destroy)
+        ok_button.pack(pady=10)
+
+        error_window.mainloop()
