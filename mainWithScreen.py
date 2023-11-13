@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, scrolledtext
 import pyperclip
+import time
 alphabet = \
 {
     'а': 100, 'б': 101, 'в': 102, 'г': 103, 'д': 104, 'е': 105, 'є': 106, 'ж': 107, 'з': 108, 'и': 109, 'і': 110, 'ї': 111, 'й': 112, 'к': 113, 'л': 114, 'м': 115, 'н': 116, 'о': 117, 'п': 118, 'р': 119, 'с': 120, 'т': 121, 'у': 122, 'ф': 123, 'х': 124, 'ц': 125, 'ч': 126, 'ш': 127, 'щ': 128, 'ь': 129, 'ю': 130, 'я': 131, ' ': 132, '\n': 133, '.': 134, ',': 135, ':': 136, '!': 137, '?': 138, '%': 139, '#': 140, '@': 141, '№': 142, ';': 143, '^': 144, '*': 145, '(': 146, ')': 147, '-': 148, '+': 149, '=': 150, '_': 151, '<': 152, '>': 153, '{': 154, '}': 155, '[': 156, ']': 157, '|': 158, '/': 159, '`': 160, '~': 161, '\'': 162, '"': 163, '\\': 164, '$': 165, '&': 166, 'a': 167, 'b': 168, 'c': 169, 'd': 170, 'e': 171, 'f': 172, 'g': 173, 'h': 174, 'i': 175, 'j': 176, 'k': 177, 'l': 178, 'm': 179, 'n': 180, 'o': 181, 'p': 182, 'q': 183, 'r': 184, 's': 185, 't': 186, 'u': 187, 'v': 188, 'w': 189, 'x': 190, 'y': 191, 'z': 192, 'А': 193, 'Б': 194, 'В': 195, 'Г': 196, 'Ґ': 197, 'Д': 198, 'Е': 199, 'Є': 200, 'Ж': 201, 'З': 202, 'И': 203, 'І': 204, 'Ї': 205, 'Й': 206, 'К': 207, 'Л': 208, 'М': 209, 'Н': 210, 'О': 211, 'П': 212, 'Р': 213, 'С': 214, 'Т': 215, 'У': 216, 'Ф': 217, 'Х': 218, 'Ц': 219, 'Ч': 220, 'Ш': 221, 'Щ': 222, 'Ь': 223, 'Ю': 224, 'A': 225, 'B': 226, 'C': 227, 'D': 228, 'E': 229, 'F': 230, 'G': 231, 'H': 232, 'I': 233, 'J': 234, 'K': 235, 'L': 236, 'M': 237, 'N': 238, 'O': 239, 'P': 240, 'Q': 241, 'R': 242, 'S': 243, 'T': 244, 'U': 245, 'V': 246, 'W': 247, 'X': 248, 'Y': 249, 'Z': 250, '1': 251, '2': 252, '3': 253, '4': 254, '5': 255, '6': 256, '7': 257, '8': 258, '9': 259, '0': 260, '—': 261, '−': 262, '«': 263, '»': 264, 'ґ': 265, 'Я' : 266
@@ -15,6 +16,8 @@ result_numbers = []
 type_of_work = '0'
 entered_text = ''
 cryptet_text = ''
+b1_3_time = 0
+b11_39_time = 0
 
 
 def crypt(encrypted_string):
@@ -407,19 +410,21 @@ if __name__ == '__main__':
             exit()
 
         print(f"q7 = {q7}, q8 = {q8}, q9 = {q9}")
-
-
-
-
-
+# створити початкок таймера
+        time_start = time.perf_counter()
         list_of_list_of_b = []
 
         while (len(cryptet_text) > 0):
+            time_start = time.perf_counter()
             b_cryptet_text = int(cryptet_text[0:15])
             b1 = int(b_cryptet_text) % p1
             b2 = int(b_cryptet_text) % p2
             b3 = int(b_cryptet_text) % p3
+            time_finish = time.perf_counter()
 
+            b1_3_time += time_finish - time_start
+
+            time_start = time.perf_counter()
             b11 = b1 % q1
             b12 = b1 % q2
             b13 = b1 % q3
@@ -431,11 +436,13 @@ if __name__ == '__main__':
             b37 = b3 % q7
             b38 = b3 % q8
             b39 = b3 % q9
+            time_finish = time.perf_counter()
+            b11_39_time += time_finish - time_start
+
+
             list_of_b = [b11, b12, b13, b24, b25, b26, b37, b38, b39]
             cryptet_text = cryptet_text[15:]
             list_of_list_of_b.append(list_of_b)
-
-
 
         with open("crypted_text.txt", "w") as file:
             for i in range(len(list_of_list_of_b)):
@@ -456,6 +463,16 @@ if __name__ == '__main__':
 
         list_of_p = [p1, p2, p3]
         list_of_q = [q1, q2, q3, q4, q5, q6, q7, q8, q9]
+        print(time.perf_counter() - time_start)
+# стоврити кінець таймера
+
+
+
+
+
+
+
+
 
         # Створення головного вікна
         root = tk.Tk()
@@ -633,7 +650,8 @@ if __name__ == '__main__':
             exit()
 
         print(f"q7 = {q7}, q8 = {q8}, q9 = {q9}")
-
+#створити початкок таймера
+        time_start = time.perf_counter()
 
         decrypted_text = ""
 
@@ -653,6 +671,9 @@ if __name__ == '__main__':
             b38 = numbers[j * 9 + 7]
             b39 = numbers[j * 9 + 8]
 
+
+            time_start = time.perf_counter()
+
             N11 = b11
             d11 = q1
             i = (b12 - N11) * pow(d11, -1, q2) % q2
@@ -670,6 +691,18 @@ if __name__ == '__main__':
             N13 = b37
             d13 = q7
             i = (b38 - N13) * pow(d13, -1, q8) % q8
+            time_finish = time.perf_counter()
+
+            b1_3_time += time_finish - time_start
+
+
+
+
+
+
+
+            time_start = time.perf_counter()
+
             N23 = N13 + i * d13
             d23 = d13 * q8
             i = (b39 - N23) * pow(d23, -1, q9) % q9
@@ -681,10 +714,33 @@ if __name__ == '__main__':
             d2 = d1 * p2
             i = (b3 - N2) * pow(d2, -1, p3) % p3
             N3 = N2 + i * d2
+            time_finish = time.perf_counter()
+
+            b11_39_time += time_finish - time_start
             crypted_text = N3
             decrypted_text += decrypt(str(crypted_text))
+
         with open('decrypted_text.txt', 'w') as file:
             file.write(decrypted_text)
+
+        print(time.perf_counter() - time_start)
+
+#стоврити кінець таймера
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         # Створення головного вікна
         root = tk.Tk()
