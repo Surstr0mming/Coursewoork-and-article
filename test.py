@@ -1,34 +1,23 @@
-"""def check_q_7_9():
-    global result_numbers
+import tkinter as tk
+from tkinter import scrolledtext
 
-    try:
-        q7 = int(entry1.get())
-        q8 = int(entry2.get())
-        q9 = int(entry3.get())
+# Створити головне вікно
+root = tk.Tk()
+root.title("Вікно виводу тексту")
 
-        valid_range = (100, 900)
+# Отримати розміри екрану
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
 
-        valid_range = (100, 900)
-        out_of_bounds = []
+# Встановити розміри вікна
+root.geometry(f"{int(screen_width*0.7)}x{int(screen_height*0.7)}")
 
-        if not valid_range[0] < q7 < valid_range[1]:
-            out_of_bounds.append("q4")
-        if not valid_range[0] < q8 < valid_range[1]:
-            out_of_bounds.append("q5")
-        if not valid_range[0] < q9 < valid_range[1]:
-            out_of_bounds.append("q6")
+# Додати прокручуваний текстовий віджет
+text_area = scrolledtext.ScrolledText(root, wrap=tk.WORD, width=int(screen_width/12), height=int(screen_height/40))
+text_area.pack(expand=True, fill='both')
 
-        if out_of_bounds:
-            result_label.config(
-                text=f"{', '.join(out_of_bounds)} {'is' if len(out_of_bounds) == 1 else 'are'} out of bounds ({valid_range[0]} - {valid_range[1]})")
-        elif gcd(q7, q8) == 1 and gcd(q7, q9) == 1 and gcd(q8, q9) == 1:
-            non_repeating_modules = [q7, q8, q9]
-            if not any(module in [q1, q2, q3, q4, q5, q6] for module in non_repeating_modules):
-                result_numbers = non_repeating_modules
-                window.destroy()  # Close the window if numbers are correct
-            else:
-                result_label.config(text=f"Modules should not repeat (q1 = {q1}, q2 = {q2}, q3 = {q3}, q4 = {q4}, q5 = {q5}, q6 = {q6})")
-        else:
-            result_label.config(text="Modules are not pairwise coprime")
-    except ValueError:
-        result_label.config(text="Please enter valid integers for q7, q8, and q9.")"""
+# Додати текст у вікно
+text_area.insert(tk.END, "Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...Ваш текст тут...")
+
+# Запустити головний цикл програми
+root.mainloop()
